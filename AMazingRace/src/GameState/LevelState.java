@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 public class LevelState extends GameState {
 
 	public LevelState(GameStateManager gsm){
-		
+		super(gsm);
 	}
 	
 	@Override

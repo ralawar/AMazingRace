@@ -9,7 +9,7 @@ public class AMazingRace {
 		JFrame window = new JFrame("A Mazing Race");
 		window.setContentPane(new GamePanel());
 		window.setResizable(false);
-		window.setLocationRelativeTo(null);
+		//window.setLocationRelativeTo(null);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.pack();
 		window.setVisible(true);
