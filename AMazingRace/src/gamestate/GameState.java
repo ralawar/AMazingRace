@@ -1,4 +1,4 @@
-package GameState;
+package gamestate;
 
 import java.awt.Graphics2D;
 

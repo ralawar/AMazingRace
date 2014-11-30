@@ -1,4 +1,7 @@
-package Main;
+package main;
+
+import gamestate.GameStateManager;
+import handler.Keys;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,9 +11,6 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
-
-import GameState.GameStateManager;
-import Handler.Keys;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {

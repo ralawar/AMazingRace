@@ -1,9 +1,9 @@
-package GameState;
+package gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import Main.GamePanel;
+import main.GamePanel;
 
 public class GameStateManager {
 

@@ -1,11 +1,12 @@
-package GameState;
+package gamestate;
+
+import handler.Keys;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import Handler.Keys;
-import Main.GamePanel;
+import main.GamePanel;
 
 public class MenuState extends GameState {
 
@@ -87,7 +88,7 @@ public class MenuState extends GameState {
 		// draw creator name and date
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
-		g.drawString("Raid A. 2014", 10, 232);
+		g.drawString("2014 Raid A.", 10, 232);
 
 	}
 

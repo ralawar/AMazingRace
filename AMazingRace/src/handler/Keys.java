@@ -1,20 +1,21 @@
-package Handler;
+package handler;
 
 import java.awt.event.KeyEvent;
 
 public class Keys {
 
 	public static final int NUM_KEYS = 6;
-
+	public static final int UP = 0;
+	public static final int LEFT = 1;
+	public static final int DOWN = 2;
+	public static final int RIGHT = 3;
+	public static final int ENTER = 4;
+	public static final int ESCAPE = 5;
+	
 	public static boolean[] keyState = new boolean[NUM_KEYS];
 	public static boolean[] prevKeyState = new boolean[NUM_KEYS];
 
-	public static int UP = 0;
-	public static int LEFT = 1;
-	public static int DOWN = 2;
-	public static int RIGHT = 3;
-	public static int ENTER = 4;
-	public static int ESCAPE = 5;
+	
 
 	public static void keySet(int i, boolean b) {
 

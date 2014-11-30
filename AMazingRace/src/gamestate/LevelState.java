@@ -1,17 +1,20 @@
-package GameState;
+package gamestate;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class LevelState extends GameState {
+import main.GamePanel;
 
-	public LevelState(GameStateManager gsm){
-		super(gsm);
-	}
+public class LevelState extends GameState {
 	
+	
+	public LevelState(GameStateManager gsm) {
+		super(gsm);
+		init();
+	}
+
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -19,11 +22,12 @@ public class LevelState extends GameState {
 		// TODO Auto-generated method stub
 
 	}
-
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
-
+		
+		g.setColor(new Color(0,128,0));
+		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+		
 	}
 
 	@Override
