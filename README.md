@@ -7,6 +7,10 @@ This is "A Mazing Race" (pun intended) where you must race against the clock to 
 Changes:
 ===========
 
+11/31/2014: Maze algorithm fully functional! Maze.java now will generate the maze and draw it to the screen after starting the game!
+			Adjust the structure of the maze package classes and moved some classes to a new misc package.
+			Created Player and Timer classes.
+ 
 11/30/2014: Implemented new Maze* classes to start testing the maze generation algorithm. Will get the algorithm working first then implement it in the drawing methods.
 			Also, corrected package names.
 			Polished the README file formatting.

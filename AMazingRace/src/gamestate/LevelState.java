@@ -4,42 +4,56 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import main.GamePanel;
+import maze.Maze;
+import misc.Player;
+import misc.Timer;
 
 public class LevelState extends GameState {
-	
-	
+
+	private Player player;
+	private Maze maze;
+	private Timer timer;
+
 	public LevelState(GameStateManager gsm) {
 		super(gsm);
 		init();
 	}
 
-	@Override
 	public void init() {
+
+		maze = new Maze(0, 0, 25, 25);
+		player = new Player(1, GamePanel.HEIGHT / 2);
+		timer = new Timer(10000);
+
 	}
 
-	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		handleInput();
+		player.update();
+		timer.update();
+	}
+
+	private void handleInput() {
 
 	}
-	@Override
+
 	public void draw(Graphics2D g) {
-		
-		g.setColor(new Color(0,128,0));
+
+		// draw background
+		g.setColor(new Color(0, 128, 0));
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-		
+
+		player.draw(g);
+		maze.draw(g);
+		//timer.draw(g);
+
 	}
 
-	@Override
 	public void keyPressed(int k) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void keyReleased(int k) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

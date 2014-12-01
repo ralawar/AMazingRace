@@ -34,11 +34,9 @@ public class MenuState extends GameState {
 
 	}
 
-	@Override
 	public void init() {
 	}
 
-	@Override
 	public void update() {
 		handleInput();
 	}
@@ -61,7 +59,6 @@ public class MenuState extends GameState {
 
 	}
 
-	@Override
 	public void draw(Graphics2D g) {
 
 		// draw background
@@ -101,12 +98,10 @@ public class MenuState extends GameState {
 		}
 	}
 
-	@Override
 	public void keyPressed(int k) {
 
 	}
 
-	@Override
 	public void keyReleased(int k) {
 
 	}
