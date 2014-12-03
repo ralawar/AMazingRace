@@ -11,7 +11,7 @@ Changes:
 			Player can now move around!
 			Boundaries are implemented. Players now cannot walk off the screen or through walls.
 			Added new pause screen.
-			Implementing "game over" screen.
+			Implemented "game over" screen.
 
 11/30/2014 (2): Maze algorithm fully functional! Maze.java now will generate the maze and draw it to the screen after starting the game!
 			Adjust the structure of the maze package classes and moved some classes to a new misc package.
