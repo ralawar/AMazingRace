@@ -25,8 +25,8 @@ public class MazeCell {
 		walls = new boolean[NUM_WALLS];
 		Arrays.fill(walls, true);
 		visited = false;
-		setStart(false);
-		setEnd(false);
+		start = false;
+		end = false;
 	}
 
 	public void setVisited(boolean visited) {

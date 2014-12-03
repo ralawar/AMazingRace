@@ -10,14 +10,12 @@ public abstract class GameState {
 		this.gsm = gsm;
 	}
 
-	public abstract void init();
+	protected abstract void init();
 
-	public abstract void update();
+	protected abstract void update();
 
-	public abstract void draw(Graphics2D g);
+	protected abstract void draw(Graphics2D g);
 
-	public abstract void keyPressed(int k);
-
-	public abstract void keyReleased(int k);
+	protected abstract void handleInput();
 
 }

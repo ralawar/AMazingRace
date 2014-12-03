@@ -3,16 +3,16 @@ package misc;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.GamePanel;
-
 public class Player {
 
-	private int x, y;
+	private int x, y, size, speed;
 
 	public Player(int x, int y) {
 
 		this.x = x;
 		this.y = y;
+		size = 8;
+		speed = 3;
 	}
 
 	public int getX() {
@@ -31,13 +31,17 @@ public class Player {
 		this.y = y;
 	}
 
-	public void update() {
+	public int getSize() {
+		return size;
+	}
 
+	public int getSpeed() {
+		return speed;
 	}
 
 	public void draw(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		g.fillOval(x, y, GamePanel.WIDTH / 80, GamePanel.HEIGHT / 60);
+		g.fillOval(x, y, size, size);
 	}
 
 }

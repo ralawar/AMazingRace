@@ -1,7 +1,9 @@
 package maze;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -10,18 +12,38 @@ import main.GamePanel;
 
 public class Maze {
 
-	private int LocationX, locationY, width, height, cellsVisited, totalCells;
+	private int width, height, cellsVisited, totalCells;
 	private MazeCell[][] maze;
-	MazeCell startCell, endCell;
+	private MazeCell startCell, endCell;
+	private ArrayList<Rectangle> wallGraphics;
+	private float heightScale;
+	private float widthScale;
+	private float wallScale;
+	private int horizontalWallHeight;
+	private int horizontalWallWidth;
+	private int verticalWallHeight;
+	private int verticalWallWidth;
+	private int rightWallOffset;
+	private int bottomWallOffset;
 
-	public Maze(int LocationX, int locationY, int width, int height) {
+	public Maze(int width, int height) {
 
-		this.LocationX = LocationX;
-		this.locationY = locationY;
 		this.width = width;
 		this.height = height;
 		cellsVisited = 0;
+
+		// variables for drawing walls
 		totalCells = this.width * this.height;
+		heightScale = (GamePanel.HEIGHT) / height;
+		widthScale = (GamePanel.WIDTH) / width;
+		wallScale = 0.1f;
+		horizontalWallHeight = (int) (wallScale * heightScale);
+		horizontalWallWidth = (int) widthScale;
+		verticalWallHeight = (int) heightScale;
+		verticalWallWidth = (int) (wallScale * widthScale);
+		rightWallOffset = horizontalWallWidth - verticalWallWidth;
+		bottomWallOffset = verticalWallHeight - horizontalWallHeight;
+		wallGraphics = new ArrayList<Rectangle>();
 
 		maze = new MazeCell[height][width];
 
@@ -44,6 +66,31 @@ public class Maze {
 		endCell.setEnd(true);
 
 		generateMaze();
+		generateWallGraphics();
+	}
+
+	private void generateWallGraphics() {
+		for (int i = 0; i < maze.length; i++) {
+			for (int j = 0; j < maze[i].length; j++) {
+				MazeCell cell = maze[i][j];
+				if (cell.getWall(MazeCell.TOP)) {
+					wallGraphics.add(new Rectangle((int) (j * widthScale), (int) (i * heightScale),
+							horizontalWallWidth, horizontalWallHeight));
+				}
+				if (cell.getWall(MazeCell.BOTTOM)) {
+					wallGraphics.add(new Rectangle((int) (j * widthScale), (int) (i * heightScale)
+							+ bottomWallOffset, horizontalWallWidth, horizontalWallHeight));
+				}
+				if (cell.getWall(MazeCell.LEFT)) {
+					wallGraphics.add(new Rectangle((int) (j * widthScale), (int) (i * heightScale),
+							verticalWallWidth, verticalWallHeight));
+				}
+				if (cell.getWall(MazeCell.RIGHT)) {
+					wallGraphics.add(new Rectangle((int) (j * widthScale) + rightWallOffset,
+							(int) (i * heightScale), verticalWallWidth, verticalWallHeight));
+				}
+			}
+		}
 	}
 
 	private void generateMaze() {
@@ -146,6 +193,23 @@ public class Maze {
 		return maze;
 	}
 
+	public MazeCell getStartCell() {
+		return startCell;
+	}
+
+	public MazeCell getEndCell() {
+		return endCell;
+	}
+	
+	public float getHeightScale(){
+		return heightScale;
+	}
+	
+	public float getWidthScale(){
+		return widthScale;
+	}
+
+
 	// print maze to console (for testing purposes)
 	public void printMaze() {
 		for (int i = 0; i < maze.length; i++) {
@@ -202,40 +266,27 @@ public class Maze {
 	 * }
 	 */
 
+	public ArrayList<Rectangle> getWallGraphics() {
+		return wallGraphics;
+	}
+
 	public void draw(Graphics2D g) {
 
-		g.setColor(Color.BLACK);
-		float heightScale = GamePanel.HEIGHT / height;
-		float widthScale = GamePanel.WIDTH / width;
-		float wallScale = 0.2f;
-		int horizontalWallHeight = (int) (wallScale * heightScale);
-		int horizontalWallWidth = (int) widthScale;
-		int verticalWallHeight = (int) heightScale;
-		int verticalWallWidth = (int) (wallScale * widthScale);
-		int rightWallOffset = horizontalWallWidth - verticalWallWidth;
-		int bottomWallOffset = verticalWallHeight - horizontalWallHeight;
+		g.setColor(Color.BLUE);
+		g.fillRect((int) (endCell.getX() * widthScale), (int) (endCell.getY() * heightScale),
+				(int) widthScale, (int) heightScale);
 
-		for (int i = 0; i < maze.length; i++) {
-			for (int j = 0; j < maze[i].length; j++) {
-				MazeCell cell = maze[i][j];
-				if (cell.getWall(MazeCell.TOP)) {
-					g.fillRect((int) (j * widthScale), (int) (i * heightScale), horizontalWallWidth, horizontalWallHeight);
-				}
-				if (cell.getWall(MazeCell.BOTTOM)) {
-					g.fillRect((int) (j * widthScale), (int) (i * heightScale) + bottomWallOffset, horizontalWallWidth, horizontalWallHeight);
-				}
-				if (cell.getWall(MazeCell.LEFT)) {
-					g.fillRect((int) (j * widthScale), (int) (i * heightScale), verticalWallWidth, verticalWallHeight);
-				}
-				if (cell.getWall(MazeCell.RIGHT)) {
-					g.fillRect((int) (j * widthScale) + rightWallOffset, (int) (i * heightScale), verticalWallWidth, verticalWallHeight);
-				}
-			}
+		g.setColor(Color.BLACK);
+
+		for (Rectangle rect : wallGraphics) {
+			g.fillRect(rect.x, rect.y, rect.width, rect.height);
 		}
 
-		g.setColor(Color.RED);
-		g.drawString("S", (int) (startCell.getX() * widthScale + verticalWallWidth), (int) (startCell.getY() * heightScale + heightScale / 2));
-		g.drawString("E", (int) (endCell.getX() * widthScale + verticalWallWidth), (int) (endCell.getY() * heightScale + heightScale / 2));
+		g.setFont(new Font("Arial", Font.PLAIN, 8));
+		g.setColor(Color.ORANGE);
+		g.drawString("START", 0, (int) (startCell.getY() * heightScale + heightScale / 2));
+		g.drawString("END", (int) (endCell.getX() * widthScale + verticalWallWidth),
+				(int) (endCell.getY() * heightScale + heightScale / 2));
 
 	}
 }

@@ -10,8 +10,8 @@ import main.GamePanel;
 
 public class MenuState extends GameState {
 
-	private int currentChoice = 0;
-	private String[] options = { "Start", "Quit" };
+	private int currentChoice;
+	private String[] options;
 
 	private Color titleColor;
 	private Font titleFont;
@@ -21,27 +21,29 @@ public class MenuState extends GameState {
 	private Font font2;
 
 	public MenuState(GameStateManager gsm) {
-
 		super(gsm);
-
-		titleColor = Color.WHITE;
-		titleFont = new Font("Times New Roman", Font.PLAIN, 28);
-
-		menuDefaultColor = Color.WHITE;
-		menuSelectColor = Color.RED;
-		font1 = new Font("Arial", Font.PLAIN, 14);
-		font2 = new Font("Arial", Font.PLAIN, 10);
-
+		init();
 	}
 
 	public void init() {
+
+		currentChoice = 0;
+		options = new String[] { "Start", "Quit" };
+
+		titleColor = Color.WHITE;
+		titleFont = new Font("Times New Roman", Font.PLAIN, 76);
+
+		menuDefaultColor = Color.WHITE;
+		menuSelectColor = Color.RED;
+		font1 = new Font("Arial", Font.PLAIN, 45);
+		font2 = new Font("Arial", Font.PLAIN, 18);
 	}
 
 	public void update() {
 		handleInput();
 	}
 
-	private void handleInput() {
+	protected void handleInput() {
 		if (Keys.isPressed(Keys.ENTER)) {
 			select();
 		}
@@ -68,7 +70,7 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("A Mazing Runner", 70, 90);
+		g.drawString("A Mazing Runner", 120, 170);
 
 		// draw menu
 		g.setFont(font1);
@@ -78,32 +80,23 @@ public class MenuState extends GameState {
 			} else {
 				g.setColor(menuDefaultColor);
 			}
-			g.drawString(options[i], 145, 165 + i * 20);
+			g.drawString(options[i], 325, 330 + i * 80);
 
 		}
 
 		// draw creator name and date
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
-		g.drawString("2014 Raid A.", 10, 232);
+		g.drawString("2014 Raid A.", 10, GamePanel.HEIGHT - 10);
 
 	}
 
 	public void select() {
 		if (currentChoice == 0) {
-			// PlayerSave.init();
 			gsm.setState(GameStateManager.LEVELSTATE);
 		} else if (currentChoice == 1) {
 			System.exit(0);
 		}
-	}
-
-	public void keyPressed(int k) {
-
-	}
-
-	public void keyReleased(int k) {
-
 	}
 
 }

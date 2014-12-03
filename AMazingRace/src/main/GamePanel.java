@@ -86,8 +86,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public void update() {
 		gsm.update();
-		Keys.update();
 		
+		// clear key spam unless player is moving
+		if (gsm.isPaused() || gsm.getCurrentState() != GameStateManager.LEVELSTATE) {
+			Keys.update();
+		}
+
 	}
 
 	public void draw() {
@@ -100,20 +104,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g2.dispose();
 	}
 
-	@Override
 	public void keyPressed(KeyEvent key) {
 
 		Keys.keySet(key.getKeyCode(), true);
 	}
 
-	@Override
 	public void keyReleased(KeyEvent key) {
 
 		Keys.keySet(key.getKeyCode(), false);
 
 	}
 
-	@Override
 	public void keyTyped(KeyEvent key) {
 	}
 

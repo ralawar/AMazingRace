@@ -11,11 +11,8 @@ public class Keys {
 	public static final int RIGHT = 3;
 	public static final int ENTER = 4;
 	public static final int ESCAPE = 5;
-	
-	public static boolean[] keyState = new boolean[NUM_KEYS];
-	public static boolean[] prevKeyState = new boolean[NUM_KEYS];
 
-	
+	public static boolean[] keyState = new boolean[NUM_KEYS];
 
 	public static void keySet(int i, boolean b) {
 
@@ -41,17 +38,16 @@ public class Keys {
 
 	public static void update() {
 		for (int i = 0; i < NUM_KEYS; i++) {
-			prevKeyState[i] = keyState[i];
+			keyState[i] = false;
 		}
-
 	}
 
 	public static boolean isPressed(int i) {
-		return keyState[i] && !prevKeyState[i];
+		return keyState[i];
 
 	}
 
-	public static boolean anyKeyPress() {
+/*	public static boolean anyKeyPress() {
 		for (int i = 0; i < NUM_KEYS; i++) {
 			if (keyState[i]) {
 				return true;
@@ -59,6 +55,6 @@ public class Keys {
 		}
 
 		return false;
-	}
+	}*/
 
 }
