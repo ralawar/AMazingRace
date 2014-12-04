@@ -8,6 +8,14 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 
+/*
+ * Class: MenuState.java
+ * Author: Raid Alawar
+ * Purpose: This is the first game state. It gives the player
+ * options to start the game or quit.
+ * 
+ */
+
 public class MenuState extends GameState {
 
 	private int currentChoice;
@@ -84,7 +92,7 @@ public class MenuState extends GameState {
 
 		}
 
-		// draw creator name and date
+		// draw date and creator name
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
 		g.drawString("2014 Raid A.", 10, GamePanel.HEIGHT - 10);

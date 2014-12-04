@@ -2,6 +2,13 @@ package handler;
 
 import java.awt.event.KeyEvent;
 
+/*
+ * Class: Keys.java
+ * Author: Raid Alawar
+ * Purpose: Manages the key input from the player.
+ * 
+ */
+
 public class Keys {
 
 	public static final int NUM_KEYS = 6;
@@ -46,15 +53,5 @@ public class Keys {
 		return keyState[i];
 
 	}
-
-/*	public static boolean anyKeyPress() {
-		for (int i = 0; i < NUM_KEYS; i++) {
-			if (keyState[i]) {
-				return true;
-			}
-		}
-
-		return false;
-	}*/
 
 }

@@ -12,6 +12,13 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+/*
+ * Class: GamePanel.java
+ * Author: Raid Alawar
+ * Purpose: Manages the game engine and graphics of the maze game.
+ * 
+ */
+
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 

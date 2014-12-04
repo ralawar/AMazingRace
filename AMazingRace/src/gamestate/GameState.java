@@ -2,6 +2,14 @@ package gamestate;
 
 import java.awt.Graphics2D;
 
+/*
+ * Class: GameState.java
+ * Author: Raid Alawar
+ * Purpose: This abstract class sets up
+ * the blueprints for the game states.
+ * 
+ */
+
 public abstract class GameState {
 
 	protected GameStateManager gsm;

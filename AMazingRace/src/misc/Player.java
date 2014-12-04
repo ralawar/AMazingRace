@@ -3,6 +3,13 @@ package misc;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/*
+ * Class: Player.java
+ * Author: Raid Alawar
+ * Purpose: Draws and tracks where the player is located.
+ * 
+ */
+
 public class Player {
 
 	private int x, y, size, speed;

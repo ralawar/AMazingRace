@@ -9,12 +9,22 @@ import java.awt.Rectangle;
 import main.GamePanel;
 import maze.Maze;
 import misc.Player;
+import misc.Timer;
+
+/*
+ * Class: LevelState.java
+ * Author: Raid Alawar
+ * Purpose: This is the game state where the player
+ * plays the game. It manages the player, timer, maze,
+ * and game results.
+ * 
+ */
 
 public class LevelState extends GameState {
 
 	private Player player;
 	private Maze maze;
-	//private Timer timer;
+	private Timer timer;
 	private int mazeHeight;
 	private int mazeWidth;
 
@@ -31,12 +41,14 @@ public class LevelState extends GameState {
 		maze = new Maze(mazeWidth, mazeHeight);
 		player = new Player(maze.getStartCell().getX() * GamePanel.WIDTH / mazeWidth, maze
 				.getStartCell().getY() * GamePanel.HEIGHT / mazeHeight + 7);
-		// timer = new Timer(10000);
+		timer = new Timer(75, gsm);
+
+		gsm.setPlayerWon(false);
 	}
 
 	public void update() {
 		handleInput();
-		// timer.update();
+		timer.update();
 	}
 
 	protected void handleInput() {
@@ -49,9 +61,12 @@ public class LevelState extends GameState {
 		int y = player.getY();
 		int speed = player.getSpeed();
 
+		// prevents the player from going outside boundaries or through objects
+		// also checks if the player reached the end zone and won
 		if (Keys.isPressed(Keys.UP) && !playerCollision(x, y - speed) && y - speed >= 0) {
 			player.setY(y - speed);
 			if (playerWins(player.getX(), player.getY())) {
+				gsm.setPlayerWon(true);
 				gsm.setState(GameStateManager.GAMEOVERSTATE);
 			}
 		}
@@ -59,12 +74,14 @@ public class LevelState extends GameState {
 				&& y + speed < GamePanel.HEIGHT - 10) {
 			player.setY(y + speed);
 			if (playerWins(player.getX(), player.getY())) {
+				gsm.setPlayerWon(true);
 				gsm.setState(GameStateManager.GAMEOVERSTATE);
 			}
 		}
 		if (Keys.isPressed(Keys.LEFT) && !playerCollision(x - speed, y) && x - speed >= 0) {
 			player.setX(x - speed);
 			if (playerWins(player.getX(), player.getY())) {
+				gsm.setPlayerWon(true);
 				gsm.setState(GameStateManager.GAMEOVERSTATE);
 			}
 		}
@@ -72,6 +89,7 @@ public class LevelState extends GameState {
 				&& x + speed < GamePanel.WIDTH - 10) {
 			player.setX(x + speed);
 			if (playerWins(player.getX(), player.getY())) {
+				gsm.setPlayerWon(true);
 				gsm.setState(GameStateManager.GAMEOVERSTATE);
 			}
 		}
@@ -108,8 +126,7 @@ public class LevelState extends GameState {
 
 		maze.draw(g);
 		player.draw(g);
-
-		// timer.draw(g);
+		timer.draw(g);
 
 	}
 

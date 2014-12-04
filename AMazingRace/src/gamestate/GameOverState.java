@@ -8,13 +8,21 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 
+/*
+ * Class: GameOverState.java
+ * Author: Raid Alawar
+ * Purpose: This is a game state that prints out the game 
+ * results and gives the player options on how to proceed.
+ * 
+ */
+
 public class GameOverState extends GameState {
 
 	private int currentChoice;
 	private String[] options;
 
-	private Color pauseColor;
-	private Font pauseFont;
+	private Color resultsColor;
+	private Font resultsFont;
 	private Color menuDefaultColor;
 	private Color menuSelectColor;
 	private Font menuFont;
@@ -28,9 +36,9 @@ public class GameOverState extends GameState {
 
 		currentChoice = 0;
 		options = new String[] { "New Game", "Quit" };
-		
-		pauseColor = Color.WHITE;
-		pauseFont = new Font("Century Gothic", Font.PLAIN, 76);
+
+		resultsColor = Color.WHITE;
+		resultsFont = new Font("Century Gothic", Font.PLAIN, 76);
 
 		menuDefaultColor = Color.WHITE;
 		menuSelectColor = Color.RED;
@@ -47,13 +55,16 @@ public class GameOverState extends GameState {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-		// draw pause title
-		g.setColor(pauseColor);
-		g.setFont(pauseFont);
-		g.drawString("Paused", 275, 160);
+		// draw results
+		g.setColor(resultsColor);
+		g.setFont(resultsFont);
+		if (gsm.playerWon()) {
+			g.drawString("You win!", 235, 170);
+		} else {
+			g.drawString("You Lose!", 220, 160);
+		}
 
 		// draw menu
-
 		g.setFont(menuFont);
 		for (int i = 0; i < options.length; i++) {
 			if (currentChoice == i) {
@@ -61,7 +72,7 @@ public class GameOverState extends GameState {
 			} else {
 				g.setColor(menuDefaultColor);
 			}
-			g.drawString(options[i], 325, 300 + i * 70);
+			g.drawString(options[i], 290, 310 + i * 70);
 
 		}
 

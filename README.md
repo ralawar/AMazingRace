@@ -7,6 +7,9 @@ This is "A Mazing Race" (pun intended) where you must race against the clock to 
 Changes:
 ===========
 
+12/4/2014:	Implemented timer class. The player must now race against time to win.
+			Greatly improved documentation.
+
 12/3/2014:	Polished the menu text.
 			Player can now move around!
 			Boundaries are implemented. Players now cannot walk off the screen or through walls.

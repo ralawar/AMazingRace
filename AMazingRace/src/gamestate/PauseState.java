@@ -8,10 +8,18 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 
+/*
+ * Class: PauseState.java
+ * Author: Raid Alawar
+ * Purpose: This is a game state that pauses the game
+ * and gives the player options on how to proceed.
+ * 
+ */
+
 public class PauseState extends GameState {
 
 	private int currentChoice = 0;
-	private String[] options = { "Continue", "Restart", "Quit" };
+	private String[] options = { "Continue", "New Game", "Quit" };
 
 	private Color pauseColor;
 	private Font pauseFont;
@@ -47,7 +55,7 @@ public class PauseState extends GameState {
 		// draw pause title
 		g.setColor(pauseColor);
 		g.setFont(pauseFont);
-		g.drawString("Paused", 275, 160);
+		g.drawString("Paused", 265, 160);
 
 		// draw menu
 
@@ -58,7 +66,7 @@ public class PauseState extends GameState {
 			} else {
 				g.setColor(menuDefaultColor);
 			}
-			g.drawString(options[i], 325, 280 + i * 70);
+			g.drawString(options[i], 315, 280 + i * 70);
 
 		}
 

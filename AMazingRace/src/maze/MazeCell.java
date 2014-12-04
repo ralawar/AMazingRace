@@ -2,6 +2,13 @@ package maze;
 
 import java.util.Arrays;
 
+/*
+ * Class: MazeCell.java
+ * Author: Raid Alawar
+ * Purpose: Manages the cells of the maze within the game.
+ * 
+ */
+
 public class MazeCell {
 
 	public static final int NUM_WALLS = 4;

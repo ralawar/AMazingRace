@@ -10,6 +10,11 @@ import java.util.Stack;
 
 import main.GamePanel;
 
+/* Class: Maze.java
+ * Author: Raid Alawar
+ * Purpose: To generate and draw randomly generated mazes.
+ */
+
 public class Maze {
 
 	private int width, height, cellsVisited, totalCells;
@@ -101,10 +106,11 @@ public class Maze {
 		ArrayList<MazeCell> unvisitedNeighbors;
 		Stack<MazeCell> stack = new Stack<MazeCell>();
 
+		// randomly generate paths in the maze until entire maze is generated
 		while (cellsVisited < totalCells) {
 			unvisitedNeighbors = getUnvisitedNeighbors(currentCell);
 			if (unvisitedNeighbors.size() > 0) {
-				nextCell = unvisitedNeighbors.get((rand.nextInt(unvisitedNeighbors.size())));
+				nextCell = unvisitedNeighbors.get(rand.nextInt(unvisitedNeighbors.size()));
 				destroyCellWalls(currentCell, nextCell);
 				stack.push(currentCell);
 				currentCell = nextCell;
@@ -140,6 +146,7 @@ public class Maze {
 			return;
 		}
 
+		// destroy walls between two cells
 		if (cell1.getY() < cell2.getY()) {
 			cell1.setWall(MazeCell.BOTTOM, false);
 			cell2.setWall(MazeCell.TOP, false);
@@ -178,17 +185,6 @@ public class Maze {
 		return unvisitedNeighbors;
 	}
 
-	/*
-	 * private MazeCell getCellNeighbor(MazeCell cell, int neighbor) {
-	 * 
-	 * if (neighbor == MazeCell.TOP) { return maze[cell.getY() - 1][cell.getX()]; } else if (neighbor ==
-	 * MazeCell.BOTTOM) { return maze[cell.getY() + 1][cell.getX()]; } else if (neighbor == MazeCell.LEFT) { return
-	 * maze[cell.getY()][cell.getX() - 1]; } else if (neighbor == MazeCell.RIGHT) { return maze[cell.getY()][cell.getX()
-	 * + 1]; }
-	 * 
-	 * return null; }
-	 */
-
 	public MazeCell[][] getMaze() {
 		return maze;
 	}
@@ -200,15 +196,14 @@ public class Maze {
 	public MazeCell getEndCell() {
 		return endCell;
 	}
-	
-	public float getHeightScale(){
+
+	public float getHeightScale() {
 		return heightScale;
 	}
-	
-	public float getWidthScale(){
+
+	public float getWidthScale() {
 		return widthScale;
 	}
-
 
 	// print maze to console (for testing purposes)
 	public void printMaze() {
@@ -260,32 +255,28 @@ public class Maze {
 		}
 	}
 
-	/*
-	 * public static void main(String[] args) { Maze test = new Maze(0, 0, 20, 20); test.printMaze();
-	 * 
-	 * }
-	 */
-
 	public ArrayList<Rectangle> getWallGraphics() {
 		return wallGraphics;
 	}
 
 	public void draw(Graphics2D g) {
 
+		// draw end zone
 		g.setColor(Color.BLUE);
 		g.fillRect((int) (endCell.getX() * widthScale), (int) (endCell.getY() * heightScale),
 				(int) widthScale, (int) heightScale);
 
+		// draw walls
 		g.setColor(Color.BLACK);
-
 		for (Rectangle rect : wallGraphics) {
 			g.fillRect(rect.x, rect.y, rect.width, rect.height);
 		}
 
+		// draw start and end zone text
 		g.setFont(new Font("Arial", Font.PLAIN, 8));
 		g.setColor(Color.ORANGE);
 		g.drawString("START", 0, (int) (startCell.getY() * heightScale + heightScale / 2));
-		g.drawString("END", (int) (endCell.getX() * widthScale + verticalWallWidth),
+		g.drawString("END", (int) (endCell.getX() * widthScale + verticalWallWidth * 2),
 				(int) (endCell.getY() * heightScale + heightScale / 2));
 
 	}

@@ -2,8 +2,15 @@ package gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-
 import main.GamePanel;
+
+/*
+ * Class: GameStateManager.java
+ * Author: Raid Alawar
+ * Purpose: Adds, deletes, switches, updates,
+ * and draws game states as needed.
+ * 
+ */
 
 public class GameStateManager {
 
@@ -16,6 +23,7 @@ public class GameStateManager {
 	private int currentState;
 	private PauseState pauseState;
 	private boolean paused;
+	private boolean playerWon;
 
 	public GameStateManager() {
 
@@ -23,6 +31,8 @@ public class GameStateManager {
 
 		pauseState = new PauseState(this);
 		paused = false;
+
+		playerWon = false;
 
 		currentState = MENUSTATE;
 		loadState(currentState);
@@ -59,6 +69,14 @@ public class GameStateManager {
 
 	public int getCurrentState() {
 		return currentState;
+	}
+
+	public boolean playerWon() {
+		return playerWon;
+	}
+
+	public void setPlayerWon(boolean b) {
+		playerWon = b;
 	}
 
 	public void update() {
